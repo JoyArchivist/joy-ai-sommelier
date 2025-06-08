@@ -43,7 +43,7 @@ HTML_TEMPLATE = """
         <input type=\"submit\" value=\"Find My Wine\">
     </form>
 
-    {% if result %}
+    {% if result is not none %}
     <div class=\"result\">
         <h2>Sommelier Recommends:</h2>
         <p><strong>Wine:</strong> {{ result.DISPLAY_NAME }}</p>
@@ -70,7 +70,7 @@ def index():
                       (df['SEASON'].str.contains(season, case=False, na=False))]
         if not filtered.empty:
             result = filtered.sample(1).iloc[0]
-    return render_template_string(HTML_TEMPLATE, result=result)
+    return render_template_string(HTML_TEMPLATE, result=result if result is not None else None)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=10000)
