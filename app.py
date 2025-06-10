@@ -4,7 +4,8 @@ import pandas as pd
 app = Flask(__name__)
 
 # Load the enriched wine data
-df = pd.read_csv("Enriched_Winedatabase.csv", encoding="ISO-8859-1")
+# Use utf-8-sig so the UTF-8 BOM is stripped and column names load correctly
+df = pd.read_csv("Enriched_Winedatabase.csv", encoding="utf-8-sig")
 
 # Basic HTML template
 HTML_TEMPLATE = """
